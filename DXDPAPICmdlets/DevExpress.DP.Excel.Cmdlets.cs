@@ -1,6 +1,8 @@
-﻿namespace DexExpress.DP.Excel.Cmdlets
+﻿using System.Management.Automation;
+
+namespace DexExpress.DP.Excel.Cmdlets
 {
-    public class DxDpExcelCmdlets
+    public class DxDpExcelCmdlets : PSCmdlet
     {
     }
 }

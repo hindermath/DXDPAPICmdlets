@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Document.Processor.de" Version="23.1.4" />
+    <PackageReference Include="System.Management.Automation" Version="7.3.6" />
+  </ItemGroup>
+
 </Project>

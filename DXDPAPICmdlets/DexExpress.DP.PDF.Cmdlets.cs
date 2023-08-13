@@ -1,6 +1,8 @@
-﻿namespace DevExpress.DP.PDF.Cmdlets
+﻿using System.Management.Automation;
+
+namespace DevExpress.DP.PDF.Cmdlets
 {
-    public class DxDpPdfCmdlets
+    public class DxDpPdfCmdlets : PSCmdlet
     {
     }
 }
