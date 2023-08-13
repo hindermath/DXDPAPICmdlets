@@ -2,7 +2,8 @@
 
 namespace DevExpress.DP.PDF.Cmdlets
 {
-    public class DxDpPdfCmdlets : PSCmdlet
+    [Cmdlet(VerbsData.Save, "DxDpPdfFile")]
+    public class SaveDxDpPdfCmdlet : PSCmdlet
     {
     }
 }

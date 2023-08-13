@@ -2,7 +2,8 @@
 
 namespace DevExpress.DP.Word.Cmdlets
 {
-    public class DxDpWordCmdlets : PSCmdlet
+    [Cmdlet(VerbsData.Save, "DxDpWordFile")]
+    public class SaveDxDpWordCmdlet : PSCmdlet
     {
 
     }

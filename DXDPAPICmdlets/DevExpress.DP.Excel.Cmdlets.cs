@@ -2,7 +2,8 @@
 
 namespace DexExpress.DP.Excel.Cmdlets
 {
-    public class DxDpExcelCmdlets : PSCmdlet
+    [Cmdlet(VerbsData.Save, "DxDpExcelFile")]
+    public class SaveDxDpExcelCmdlet : PSCmdlet
     {
     }
 }
