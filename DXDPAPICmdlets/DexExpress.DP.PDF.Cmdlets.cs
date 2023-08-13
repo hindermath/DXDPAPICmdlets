@@ -22,7 +22,7 @@ namespace DevExpress.DP.PDF.Cmdlets
             if (Console.IsInputRedirected)
             {
                 ErrorRecord errorRecord = new ErrorRecord(
-                    new PSInvalidOperationException("Input is not supported from the pipeline."),
+                    new PSInvalidOperationException("Not supported in this environment (when input is redirected)."),
                     "InputNotSupported",
                     ErrorCategory.InvalidOperation,
                     null);
