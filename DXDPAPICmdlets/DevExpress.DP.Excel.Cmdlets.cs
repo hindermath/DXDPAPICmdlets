@@ -10,6 +10,10 @@ namespace DexExpress.DP.Excel.Cmdlets
         private List<PSObject> _psObjects = new List<PSObject>();
         #endregion Properties
         #region Input Parameters
+        /// <summary>
+        /// This parameter specifies the current pipeline object.
+        /// Dieser Parameter gibt das aktuelle Pipeline-Objekt an.
+        /// </summary>
         [Parameter(ValueFromPipeline = true, HelpMessage = "Specifies the input pipeline object")]
         public PSObject InputObject { get; set; } = AutomationNull.Value;
         #endregion
