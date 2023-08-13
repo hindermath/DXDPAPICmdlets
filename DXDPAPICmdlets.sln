@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34003.232
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DXDPAPICmdlets", "DXDPAPICmdlets\DXDPAPICmdlets.csproj", "{FD1CDFD0-9204-414D-86AA-8E8642F14778}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD1CDFD0-9204-414D-86AA-8E8642F14778}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD1CDFD0-9204-414D-86AA-8E8642F14778}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD1CDFD0-9204-414D-86AA-8E8642F14778}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD1CDFD0-9204-414D-86AA-8E8642F14778}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {50555F0A-280D-4D5C-BE91-A30A7B57D7B7}
+	EndGlobalSection
+EndGlobal
