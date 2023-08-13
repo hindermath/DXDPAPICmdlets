@@ -6,7 +6,10 @@ namespace DexExpress.DP.Excel.Cmdlets
     [Cmdlet(VerbsData.Save, "DxDpExcelFile")]
     public class SaveDxDpExcelCmdlet : PSCmdlet
     {
-#region Input Parameters
+        #region Properties
+        private List<PSObject> _psObjects = new List<PSObject>();
+        #endregion Properties
+        #region Input Parameters
         [Parameter(ValueFromPipeline = true, HelpMessage = "Specifies the input pipeline object")]
         public PSObject InputObject { get; set; } = AutomationNull.Value;
         #endregion
@@ -22,6 +25,18 @@ namespace DexExpress.DP.Excel.Cmdlets
                 ThrowTerminatingError(errorRecord);
             }
         }
+        protected override void ProcessRecord()
+        {
+            if (InputObject == null || InputObject == AutomationNull.Value)
+                return;
+        }
+        protected override void EndProcessing()
+        {
+            base.EndProcessing();
 
+            // Rückkehr, wenn keine Objekte vorhanden sind
+            if (_psObjects.Count == 0)
+                return;
+        }
     }
 }
