@@ -32,7 +32,7 @@ namespace DevExpress.DP.PDF.Cmdlets
 
         protected override void ProcessRecord()
         {
-            if (InputObject == null || InputObject == AutomationNull.Value)
+            if (InputObject == null || InputObject.Equals(AutomationNull.Value))
                 return;
         }
         protected override void EndProcessing()
