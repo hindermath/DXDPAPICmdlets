@@ -1,8 +1,10 @@
 ﻿using System.Collections;
+using System.Diagnostics;
 using System.Management.Automation;
 using System.Management.Automation.Internal;
 using DXDPAPICmdlets.Helper;
-using DXDPAPICmdlets.Models;
+using DevExpress.XtraRichEdit;
+using DevExpress.XtraRichEdit.API.Native;
 
 namespace DevExpress.DP.Word.Cmdlets
 {
@@ -25,6 +27,8 @@ namespace DevExpress.DP.Word.Cmdlets
         public PSObject InputObject { get; set; } = AutomationNull.Value;
         [Parameter(HelpMessage = "Open th file in the associated word processor")]
         public SwitchParameter OpenFileInWordProcessor { get; set; }
+        [Parameter(Mandatory = true ,HelpMessage = "Specifies the file name")]
+        public string FileName { get; set; }
 #endregion
         protected override void BeginProcessing()
         {
@@ -66,6 +70,19 @@ namespace DevExpress.DP.Word.Cmdlets
             var TG = new TypeGetter(this);
 
             _dataTable = TG.CastObjectsToTableView(_psObjects);
+
+            using (var wordProcessor = new RichEditDocumentServer())
+            {
+                Document document = wordProcessor.Document;
+                document.BeginUpdate();
+                document.Tables.Create(document.Range.Start, _dataTable.Data.Count, _dataTable.DataColumns.Count);
+                document.EndUpdate();
+
+                wordProcessor.SaveDocument(FileName, DocumentFormat.Dotx);
+            }
+
+            if (OpenFileInWordProcessor)
+                Process.Start(new ProcessStartInfo(FileName) {UseShellExecute = true});
 
         }
 
