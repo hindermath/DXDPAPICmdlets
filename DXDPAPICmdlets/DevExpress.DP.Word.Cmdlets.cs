@@ -1,6 +1,5 @@
 ﻿using System.Management.Automation;
 using System.Management.Automation.Internal;
-using DevExpress.XtraSpreadsheet.Model.CopyOperation;
 
 namespace DevExpress.DP.Word.Cmdlets
 {
