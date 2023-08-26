@@ -2,6 +2,7 @@
 using System.Management.Automation;
 using System.Management.Automation.Internal;
 using DXDPAPICmdlets.Helper;
+using DXDPAPICmdlets.Models;
 
 namespace DevExpress.DP.Word.Cmdlets
 {
@@ -13,6 +14,7 @@ namespace DevExpress.DP.Word.Cmdlets
         private List<PSObject> _psObjects = new List<PSObject>();
         private ProcessObject _processObject = new ProcessObject();
         private ErrorRecord? _errorRecord;
+        private DXDPAPICmdlets.Models.DataTable _dataTable;
         #endregion Properties
         #region Input Parameters
         /// <summary>
@@ -21,6 +23,8 @@ namespace DevExpress.DP.Word.Cmdlets
         /// </summary>
         [Parameter(ValueFromPipeline = true, HelpMessage = "Specifies the input pipeline object")]
         public PSObject InputObject { get; set; } = AutomationNull.Value;
+        [Parameter(HelpMessage = "Open th file in the associated word processor")]
+        public SwitchParameter OpenFileInWordProcessor { get; set; }
 #endregion
         protected override void BeginProcessing()
         {
@@ -61,7 +65,7 @@ namespace DevExpress.DP.Word.Cmdlets
 
             var TG = new TypeGetter(this);
 
-            var dataTable = TG.CastObjectsToTableView(_psObjects);
+            _dataTable = TG.CastObjectsToTableView(_psObjects);
 
         }
 
