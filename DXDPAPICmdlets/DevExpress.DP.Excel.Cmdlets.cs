@@ -31,7 +31,7 @@ namespace DexExpress.DP.Excel.Cmdlets
         }
         protected override void ProcessRecord()
         {
-            if (InputObject == null || InputObject.Equals(AutomationNull.Value))
+            if (InputObject.Equals(null) || InputObject.Equals(AutomationNull.Value))
                 return;
         }
         protected override void EndProcessing()
@@ -39,7 +39,7 @@ namespace DexExpress.DP.Excel.Cmdlets
             base.EndProcessing();
 
             // Rückkehr, wenn keine Objekte vorhanden sind
-            if (_psObjects.Count == 0)
+            if (_psObjects.Count.Equals(0))
                 return;
         }
     }

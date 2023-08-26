@@ -33,7 +33,7 @@ namespace DevExpress.DP.Word.Cmdlets
 
         protected override void ProcessRecord()
         {
-            if (InputObject == null || InputObject.Equals(AutomationNull.Value))
+            if (InputObject.Equals(null) || InputObject.Equals(AutomationNull.Value))
                 return;
         }
 
@@ -42,7 +42,7 @@ namespace DevExpress.DP.Word.Cmdlets
             base.EndProcessing();
 
             // Rückkehr, wenn keine Objekte vorhanden sind
-            if (_psObjects.Count == 0)
+            if (_psObjects.Count.Equals(0))
                 return;
         }
     }
