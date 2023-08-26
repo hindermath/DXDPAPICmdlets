@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Management.Automation;
 using System.Management.Automation.Internal;
+using DXDPAPICmdlets.Helper;
 
 namespace DevExpress.DP.Word.Cmdlets
 {
     [Cmdlet(VerbsData.Save, "DxDpWordFile")]
     [Alias("SavAsWordFile")]
-    public class SaveDxDpWordCmdlet : PSCmdlet
+    public class SaveDxDpWordCmdlet : PSCmdlet, IDisposable
     {
         #region Properties
         private List<PSObject> _psObjects = new List<PSObject>();
+        private ProcessObject _processObject = new ProcessObject();
+        private ErrorRecord? _errorRecord;
         #endregion Properties
         #region Input Parameters
         /// <summary>
@@ -34,40 +37,18 @@ namespace DevExpress.DP.Word.Cmdlets
 
         protected override void ProcessRecord()
         {
+
             if (InputObject.Equals(null) || InputObject.Equals(AutomationNull.Value))
                 return;
 
             if (InputObject.BaseObject is IDictionary dictionary)
             {
                 foreach (DictionaryEntry entry in dictionary)
-                {
-                    ProcessObject(PSObject.AsPSObject(entry));
-                }
+                    if (_processObject.TryProcessObject(PSObject.AsPSObject(entry), ref _psObjects, out _errorRecord))
+                        ThrowTerminatingError(_errorRecord);
             }
-            else
-            {
-                ProcessObject(InputObject);
-            }
-        }
-
-        private void ProcessObject(PSObject inputPsObject)
-        {
-            object baseObject = inputPsObject.BaseObject;
-
-            if (baseObject is ScriptBlock ||
-                baseObject is SwitchParameter ||
-                baseObject is PSReference ||
-                baseObject is PSObject)
-            {
-                ErrorRecord errorRecord = new ErrorRecord(
-                    new FormatException("Invalid data type for document processing"),
-             "InputNotSupported",
-                    ErrorCategory.InvalidOperation,
-          null);
-                ThrowTerminatingError(errorRecord);
-            }
-
-            _psObjects.Add(inputPsObject);
+            else if (_processObject.TryProcessObject(InputObject, ref _psObjects, out _errorRecord))
+                        ThrowTerminatingError(_errorRecord);
         }
 
         protected override void EndProcessing()
@@ -78,7 +59,15 @@ namespace DevExpress.DP.Word.Cmdlets
             if (_psObjects.Count.Equals(0))
                 return;
 
-            //var TG = new TypeGetter(this);
+            var TG = new TypeGetter(this);
+
+            var dataTable = TG.CastObjectsToTableView(_psObjects);
+
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }
