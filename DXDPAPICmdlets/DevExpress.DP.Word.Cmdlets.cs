@@ -67,9 +67,9 @@ namespace DXDPAPICmdlets
             if (_psObjects.Count.Equals(0))
                 return;
 
-            var TG = new TypeGetter(this);
+            TypeGetter typeGetter = new TypeGetter(this);
 
-            _dataTable = TG.CastObjectsToTableView(_psObjects);
+            _dataTable = typeGetter.CastObjectsToTableView(_psObjects);
 
             using (var wordProcessor = new RichEditDocumentServer())
             {
