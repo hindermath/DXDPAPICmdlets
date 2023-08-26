@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Diagnostics;
+using System.Drawing;
 using System.Management.Automation;
 using System.Management.Automation.Internal;
 using DXDPAPICmdlets.Helper;
@@ -74,11 +75,12 @@ namespace DevExpress.DP.Word.Cmdlets
             using (var wordProcessor = new RichEditDocumentServer())
             {
                 Document document = wordProcessor.Document;
-                document.BeginUpdate();
-                document.Tables.Create(document.Range.Start, _dataTable.Data.Count, _dataTable.DataColumns.Count);
-                document.EndUpdate();
 
-                wordProcessor.SaveDocument(FileName, DocumentFormat.Dotx);
+                Table table = document.Tables.Create(document.Range.Start, _dataTable.Data.Count, _dataTable.DataColumns.Count, AutoFitBehaviorType.AutoFitToWindow);
+
+
+                wordProcessor.SaveDocument(FileName, DocumentFormat.OpenXml);
+
             }
 
             if (OpenFileInWordProcessor)
