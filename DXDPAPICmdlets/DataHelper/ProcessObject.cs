@@ -1,8 +1,6 @@
 ﻿using System.Management.Automation;
-using System.Management.Automation.Internal;
 
-
-namespace DXDPAPICmdlets.Helper;
+namespace DXDPAPICmdlets.DataHelper;
 
 public class ProcessObject
 {

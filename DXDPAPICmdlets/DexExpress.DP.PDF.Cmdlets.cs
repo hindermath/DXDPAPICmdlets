@@ -1,7 +1,7 @@
 ﻿using System.Management.Automation;
 using System.Management.Automation.Internal;
 
-namespace DevExpress.DP.PDF.Cmdlets
+namespace DXDPAPICmdlets
 {
     [Cmdlet(VerbsData.Save, "DxDpPdfFile")]
     [Alias("SavAsPdfFile")]

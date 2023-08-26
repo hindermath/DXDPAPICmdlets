@@ -1,7 +1,7 @@
 ﻿using System.Management.Automation;
 using System.Management.Automation.Internal;
 
-namespace DexExpress.DP.Excel.Cmdlets
+namespace DXDPAPICmdlets
 {
     [Cmdlet(VerbsData.Save, "DxDpExcelFile")]
     [Alias("SavAsExcelFile")]

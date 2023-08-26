@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using System.Diagnostics;
-using System.Drawing;
 using System.Management.Automation;
 using System.Management.Automation.Internal;
-using DXDPAPICmdlets.Helper;
 using DevExpress.XtraRichEdit;
 using DevExpress.XtraRichEdit.API.Native;
+using DXDPAPICmdlets.DataHelper;
 
-namespace DevExpress.DP.Word.Cmdlets
+namespace DXDPAPICmdlets
 {
     [Cmdlet(VerbsData.Save, "DxDpWordFile")]
     [Alias("SavAsWordFile")]

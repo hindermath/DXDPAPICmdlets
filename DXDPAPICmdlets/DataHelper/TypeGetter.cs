@@ -1,17 +1,13 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-using System;
+using System.Globalization;
 using System.Management.Automation;
 using System.Management.Automation.Internal;
-using System.Linq;
-using System.Globalization;
-using System.Collections.Generic;
-using Microsoft.PowerShell.Commands;
 using DXDPAPICmdlets.Models;
-using System.Text.RegularExpressions;
+using Microsoft.PowerShell.Commands;
 
-namespace DXDPAPICmdlets.Helper
+namespace DXDPAPICmdlets.DataHelper
 {
     public class TypeGetter
     {

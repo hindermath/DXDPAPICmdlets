@@ -11,4 +11,10 @@
     <PackageReference Include="System.Management.Automation" Version="7.3.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ExcelHelper\" />
+    <Folder Include="PDFHelper\" />
+    <Folder Include="WordHelper\" />
+  </ItemGroup>
+
 </Project>
