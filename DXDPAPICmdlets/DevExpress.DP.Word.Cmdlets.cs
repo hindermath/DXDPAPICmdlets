@@ -1,4 +1,5 @@
-﻿using System.Management.Automation;
+﻿using System.Collections;
+using System.Management.Automation;
 using System.Management.Automation.Internal;
 
 namespace DevExpress.DP.Word.Cmdlets
@@ -35,6 +36,38 @@ namespace DevExpress.DP.Word.Cmdlets
         {
             if (InputObject.Equals(null) || InputObject.Equals(AutomationNull.Value))
                 return;
+
+            if (InputObject.BaseObject is IDictionary dictionary)
+            {
+                foreach (DictionaryEntry entry in dictionary)
+                {
+                    ProcessObject(PSObject.AsPSObject(entry));
+                }
+            }
+            else
+            {
+                ProcessObject(InputObject);
+            }
+        }
+
+        private void ProcessObject(PSObject inputPsObject)
+        {
+            object baseObject = inputPsObject.BaseObject;
+
+            if (baseObject is ScriptBlock ||
+                baseObject is SwitchParameter ||
+                baseObject is PSReference ||
+                baseObject is PSObject)
+            {
+                ErrorRecord errorRecord = new ErrorRecord(
+                    new FormatException("Invalid data type for document processing"),
+             "InputNotSupported",
+                    ErrorCategory.InvalidOperation,
+          null);
+                ThrowTerminatingError(errorRecord);
+            }
+
+            _psObjects.Add(inputPsObject);
         }
 
         protected override void EndProcessing()
