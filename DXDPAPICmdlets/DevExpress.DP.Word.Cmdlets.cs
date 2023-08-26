@@ -77,6 +77,8 @@ namespace DevExpress.DP.Word.Cmdlets
             // Rückkehr, wenn keine Objekte vorhanden sind
             if (_psObjects.Count.Equals(0))
                 return;
+
+            //var TG = new TypeGetter(this);
         }
     }
 }
