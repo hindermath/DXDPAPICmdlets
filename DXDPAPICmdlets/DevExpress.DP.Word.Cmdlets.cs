@@ -5,6 +5,7 @@ using DevExpress.XtraSpreadsheet.Model.CopyOperation;
 namespace DevExpress.DP.Word.Cmdlets
 {
     [Cmdlet(VerbsData.Save, "DxDpWordFile")]
+    [Alias("SavAsWordFile")]
     public class SaveDxDpWordCmdlet : PSCmdlet
     {
         #region Properties

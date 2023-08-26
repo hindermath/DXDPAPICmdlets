@@ -4,6 +4,7 @@ using System.Management.Automation.Internal;
 namespace DevExpress.DP.PDF.Cmdlets
 {
     [Cmdlet(VerbsData.Save, "DxDpPdfFile")]
+    [Alias("SavAsPdfFile")]
     public class SaveDxDpPdfCmdlet : PSCmdlet
     {
         #region Properties

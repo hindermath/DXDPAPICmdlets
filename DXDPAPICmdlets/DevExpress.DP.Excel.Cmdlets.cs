@@ -4,6 +4,7 @@ using System.Management.Automation.Internal;
 namespace DexExpress.DP.Excel.Cmdlets
 {
     [Cmdlet(VerbsData.Save, "DxDpExcelFile")]
+    [Alias("SavAsExcelFile")]
     public class SaveDxDpExcelCmdlet : PSCmdlet
     {
         #region Properties
