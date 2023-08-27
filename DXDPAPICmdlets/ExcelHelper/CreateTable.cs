@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using DevExpress.Spreadsheet;
 using DXDPAPICmdlets.Models;
+using DXDPAPICmdlets.Helper;
 
 namespace DXDPAPICmdlets.ExcelHelper
 {
     internal class CreateTable
     {
+        Common common = new Common();
         public void CreateTableInSpreadsheet(DataTable dataTable, string fileName)
         {
             using (Workbook workbook = new Workbook())
@@ -26,7 +28,7 @@ namespace DXDPAPICmdlets.ExcelHelper
                 }
 
                 workbook.Calculate();
-                workbook.ExportToPdf(fileName+".pdf");
+                workbook.ExportToPdf(fileName+common.PdfExtension);
                 workbook.SaveDocument(fileName, DocumentFormat.Xlsx);
             }
 

@@ -29,10 +29,10 @@ namespace DXDPAPICmdlets
         public SwitchParameter OpenFileInSpreadsheet { get; set; }
         [Parameter(HelpMessage = "Calculates the formulas in the workbook or worksheet")]
         public SwitchParameter CalcuateSpreadsheets { get; set; }
-        [Parameter(HelpMessage = "Save the file as PDF")]
-        public SwitchParameter SaveAsPdf { get; set; }
+        [Parameter(HelpMessage = "Export the file to PDF")]
+        public SwitchParameter ExportToPdf { get; set; }
         [Parameter(Mandatory = true, HelpMessage = "Specifies the file name")]
-        public string FileName { get; set; }
+        public string FileName { get; set; } = "a.xlsx";
         #endregion
         protected override void BeginProcessing()
         {

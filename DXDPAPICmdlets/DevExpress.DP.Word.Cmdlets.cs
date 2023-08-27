@@ -30,10 +30,10 @@ namespace DXDPAPICmdlets
         public PSObject InputObject { get; set; } = AutomationNull.Value;
         [Parameter(HelpMessage = "Open th file in the associated word processor")]
         public SwitchParameter OpenFileInWordProcessor { get; set; }
-        [Parameter(HelpMessage = "Save the file as PDF")]
-        public SwitchParameter SaveAsPdf { get; set; }
-        [Parameter(Mandatory = true ,HelpMessage = "Specifies the file name")]
-        public string FileName { get; set; }
+        [Parameter(HelpMessage = "Export the file to PDF")]
+        public SwitchParameter ExportToPdf { get; set; }
+        [Parameter(Mandatory = true, HelpMessage = "Specifies the file name")]
+        public string FileName { get; set; } = "a.docx";
 #endregion
         protected override void BeginProcessing()
         {
