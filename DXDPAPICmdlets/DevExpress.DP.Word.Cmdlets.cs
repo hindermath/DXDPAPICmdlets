@@ -5,6 +5,8 @@ using System.Management.Automation.Internal;
 using DevExpress.XtraRichEdit;
 using DevExpress.XtraRichEdit.API.Native;
 using DXDPAPICmdlets.DataHelper;
+using DXDPAPICmdlets.Models;
+using DXDPAPICmdlets.WordHelper;
 
 namespace DXDPAPICmdlets
 {
@@ -16,7 +18,8 @@ namespace DXDPAPICmdlets
         private List<PSObject> _psObjects = new List<PSObject>();
         private ProcessObject _processObject = new ProcessObject();
         private ErrorRecord? _errorRecord;
-        private DXDPAPICmdlets.Models.DataTable _dataTable;
+        private DataTable _dataTable;
+        private CreateTable _createTable = new WordHelper.CreateTable();
         #endregion Properties
         #region Input Parameters
         /// <summary>
@@ -27,6 +30,8 @@ namespace DXDPAPICmdlets
         public PSObject InputObject { get; set; } = AutomationNull.Value;
         [Parameter(HelpMessage = "Open th file in the associated word processor")]
         public SwitchParameter OpenFileInWordProcessor { get; set; }
+        [Parameter(HelpMessage = "Save the file as PDF")]
+        public SwitchParameter SaveAsPdf { get; set; }
         [Parameter(Mandatory = true ,HelpMessage = "Specifies the file name")]
         public string FileName { get; set; }
 #endregion
@@ -71,16 +76,7 @@ namespace DXDPAPICmdlets
 
             _dataTable = typeGetter.CastObjectsToTableView(_psObjects);
 
-            using (var wordProcessor = new RichEditDocumentServer())
-            {
-                Document document = wordProcessor.Document;
-
-                Table table = document.Tables.Create(document.Range.Start, _dataTable.Data.Count, _dataTable.DataColumns.Count, AutoFitBehaviorType.AutoFitToWindow);
-
-
-                wordProcessor.SaveDocument(FileName, DocumentFormat.OpenXml);
-
-            }
+            _createTable.CreateTableInDocument(_dataTable, FileName);
 
             if (OpenFileInWordProcessor)
                 Process.Start(new ProcessStartInfo(FileName) {UseShellExecute = true});

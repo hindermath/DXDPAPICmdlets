@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Diagnostics;
 using DXDPAPICmdlets.DataHelper;
 using System.Management.Automation;
 using System.Management.Automation.Internal;
@@ -15,6 +16,7 @@ namespace DXDPAPICmdlets
         private ProcessObject _processObject = new ProcessObject();
         private ErrorRecord? _errorRecord;
         private DXDPAPICmdlets.Models.DataTable _dataTable;
+        private PDFHelper.CreateTable _createTable = new PDFHelper.CreateTable();
         #endregion Properties
         #region Input Parameters
         /// <summary>
@@ -67,10 +69,10 @@ namespace DXDPAPICmdlets
 
             _dataTable = typeGetter.CastObjectsToTableView(_psObjects);
 
-            _dataTable = typeGetter.CastObjectsToTableView(_psObjects); using (PdfDocumentProcessor pdfDocumentProcessor = new PdfDocumentProcessor())
-            {
+            _createTable.CreateTableInPdf(_dataTable, FileName);
 
-            }
+            if (OpenFileInPdfApp)
+                Process.Start(new ProcessStartInfo(FileName) { UseShellExecute = true });
         }
     }
 }

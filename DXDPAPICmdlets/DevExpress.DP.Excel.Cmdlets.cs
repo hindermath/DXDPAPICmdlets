@@ -16,6 +16,7 @@ namespace DXDPAPICmdlets
         private ProcessObject _processObject = new ProcessObject();
         private ErrorRecord? _errorRecord;
         private DXDPAPICmdlets.Models.DataTable _dataTable;
+        private ExcelHelper.CreateTable _createTable = new ExcelHelper.CreateTable();
         #endregion Properties
         #region Input Parameters
         /// <summary>
@@ -24,8 +25,12 @@ namespace DXDPAPICmdlets
         /// </summary>
         [Parameter(ValueFromPipeline = true, HelpMessage = "Specifies the input pipeline object")]
         public PSObject InputObject { get; set; } = AutomationNull.Value;
-        [Parameter(HelpMessage = "Open th file in the associated word processor")]
+        [Parameter(HelpMessage = "Open the file in the associated spreadsheet application")]
         public SwitchParameter OpenFileInSpreadsheet { get; set; }
+        [Parameter(HelpMessage = "Calculates the formulas in the workbook or worksheet")]
+        public SwitchParameter CalcuateSpreadsheets { get; set; }
+        [Parameter(HelpMessage = "Save the file as PDF")]
+        public SwitchParameter SaveAsPdf { get; set; }
         [Parameter(Mandatory = true, HelpMessage = "Specifies the file name")]
         public string FileName { get; set; }
         #endregion
@@ -67,22 +72,7 @@ namespace DXDPAPICmdlets
 
             _dataTable = typeGetter.CastObjectsToTableView(_psObjects);
 
-            using (Workbook workbook = new Workbook())
-            {
-                Worksheet worksheet = workbook.Worksheets[0];
-                workbook.BeginUpdate();
-                try
-                {
-                    worksheet.Import(_dataTable.Data, 0, 0);
-                }
-                finally
-                {
-                    workbook.EndUpdate();
-                }
-                workbook.Calculate();
-                workbook.SaveDocument(FileName, DocumentFormat.Xlsx);
-            }
-
+            _createTable.CreateTableInSpreadsheet(_dataTable, FileName);
 
             if (OpenFileInSpreadsheet)
                 Process.Start(new ProcessStartInfo(FileName) {UseShellExecute = true});
