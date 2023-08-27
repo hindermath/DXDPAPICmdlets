@@ -10,8 +10,6 @@ namespace DXDPAPICmdlets.ExcelHelper
 {
     internal class CreateTable
     {
-        SaveDxDpExcelCmdlet saveDxDpExcelCmdlet = new SaveDxDpExcelCmdlet();
-
         public void CreateTableInSpreadsheet(DataTable dataTable, string fileName)
         {
             using (Workbook workbook = new Workbook())
@@ -27,10 +25,8 @@ namespace DXDPAPICmdlets.ExcelHelper
                     workbook.EndUpdate();
                 }
 
-                if (saveDxDpExcelCmdlet.CalcuateSpreadsheets)
-                    workbook.Calculate();
-                if (saveDxDpExcelCmdlet.SaveAsPdf)
-                    workbook.ExportToPdf(fileName);
+                workbook.Calculate();
+                workbook.ExportToPdf(fileName+".pdf");
                 workbook.SaveDocument(fileName, DocumentFormat.Xlsx);
             }
 
