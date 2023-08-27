@@ -20,7 +20,15 @@ namespace DXDPAPICmdlets.ExcelHelper
                 workbook.BeginUpdate();
                 try
                 {
-                    worksheet.Import(dataTable.Data, 0, 0);
+                    CellRange cellRange = worksheet.Range.FromLTRB(0, 0, dataTable.DataColumns.Count, dataTable.Data.Count);
+                    Table table = worksheet.Tables.Add(cellRange, true);
+                    table.ShowTableStyleRowStripes = true;
+                    table.Style = workbook.TableStyles[BuiltInTableStyleId.TableStyleMedium2];
+                    for (int i = 0; i < dataTable.DataColumns.Count; i++)
+                    {
+                        TableColumn tableColumn = table.Columns[i];
+                        tableColumn.Name = dataTable.DataColumns[i].Label;
+                    }
                 }
                 finally
                 {
