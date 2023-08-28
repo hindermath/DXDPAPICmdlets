@@ -22,13 +22,31 @@ namespace DXDPAPICmdlets.ExcelHelper
                 {
                     CellRange cellRange = worksheet.Range.FromLTRB(0, 0, dataTable.DataColumns.Count, dataTable.Data.Count);
                     Table table = worksheet.Tables.Add(cellRange, true);
+                    
                     table.ShowTableStyleRowStripes = true;
                     table.Style = workbook.TableStyles[BuiltInTableStyleId.TableStyleMedium2];
-                    for (int i = 0; i < dataTable.DataColumns.Count; i++)
+                    
+                    for (int headerCol = 0; headerCol < dataTable.DataColumns.Count; headerCol++)
                     {
-                        TableColumn tableColumn = table.Columns[i];
-                        tableColumn.Name = dataTable.DataColumns[i].Label;
+                        TableColumn tableColumn = table.Columns[headerCol];
+                        tableColumn.Name = dataTable.DataColumns[headerCol].Label;
                     }
+
+                    for (int cellRowIndex = 0; cellRowIndex < dataTable.Data.Count; cellRowIndex++)
+                    {
+                        var dataTableRow = dataTable.Data[cellRowIndex];
+                        var valueList = new List<string>();
+                        foreach (var dataTableColumn in dataTable.DataColumns)
+                        {
+                            string dataValue = dataTableRow.Values[dataTableColumn.ToString()].DisplayValue;
+                            valueList.Add(dataValue);
+                        }
+                        for (int cellColIndex = 0; cellColIndex < valueList.Count; cellColIndex++)
+                        {
+                            worksheet.Cells[cellRowIndex, cellColIndex].Value = valueList[cellColIndex];
+                        }
+                    }
+
                 }
                 finally
                 {
