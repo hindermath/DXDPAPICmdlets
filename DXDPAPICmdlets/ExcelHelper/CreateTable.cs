@@ -32,6 +32,7 @@ namespace DXDPAPICmdlets.ExcelHelper
                         tableColumn.Name = dataTable.DataColumns[headerCol].Label;
                     }
 
+                    CellRange cellDataRange = table.DataRange;
                     for (int cellRowIndex = 0; cellRowIndex < dataTable.Data.Count; cellRowIndex++)
                     {
                         var dataTableRow = dataTable.Data[cellRowIndex];
@@ -40,10 +41,10 @@ namespace DXDPAPICmdlets.ExcelHelper
                         {
                             string dataValue = dataTableRow.Values[dataTableColumn.ToString()].DisplayValue;
                             valueList.Add(dataValue);
-                        }
+                        } 
                         for (int cellColIndex = 0; cellColIndex < valueList.Count; cellColIndex++)
                         {
-                            worksheet.Cells[cellRowIndex, cellColIndex].Value = valueList[cellColIndex];
+                            cellDataRange[cellRowIndex, cellColIndex].Value = valueList[cellColIndex];
                         }
                     }
 
