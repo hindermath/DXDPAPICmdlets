@@ -18,34 +18,29 @@ namespace DXDPAPICmdlets.ExcelHelper
             {
                 Worksheet worksheet = workbook.Worksheets[0];
                 workbook.BeginUpdate();
+                var cellRange = worksheet.Range.FromLTRB(0, 0, dataTable.DataColumns.Count - 1, dataTable.Data.Count);
+                var table = worksheet.Tables.Add(cellRange, true);
+                var cellDataRange = table.DataRange;
                 try
                 {
-                    CellRange cellRange = worksheet.Range.FromLTRB(0, 0, dataTable.DataColumns.Count, dataTable.Data.Count);
-                    Table table = worksheet.Tables.Add(cellRange, true);
-                    
                     table.ShowTableStyleRowStripes = true;
                     table.Style = workbook.TableStyles[BuiltInTableStyleId.TableStyleMedium2];
                     
-                    for (int headerCol = 0; headerCol < dataTable.DataColumns.Count; headerCol++)
+                    for (var headerCol = 0; headerCol < dataTable.DataColumns.Count; headerCol++)
                     {
                         TableColumn tableColumn = table.Columns[headerCol];
                         tableColumn.Name = dataTable.DataColumns[headerCol].Label;
                     }
 
-                    CellRange cellDataRange = table.DataRange;
-                    for (int cellRowIndex = 0; cellRowIndex < dataTable.Data.Count; cellRowIndex++)
+                    for (var cellRowIndex = 0; cellRowIndex < dataTable.Data.Count; cellRowIndex++)
                     {
                         var dataTableRow = dataTable.Data[cellRowIndex];
                         var valueList = new List<string>();
                         foreach (var dataTableColumn in dataTable.DataColumns)
-                        {
-                            string dataValue = dataTableRow.Values[dataTableColumn.ToString()].DisplayValue;
-                            valueList.Add(dataValue);
-                        } 
-                        for (int cellColIndex = 0; cellColIndex < valueList.Count; cellColIndex++)
-                        {
+                            //string dataValue = dataTableRow.Values[dataTableColumn.ToString()].DisplayValue;
+                            valueList.Add(dataTableRow.Values[dataTableColumn.ToString()].DisplayValue);
+                        for (var cellColIndex = 0; cellColIndex < valueList.Count; cellColIndex++)
                             cellDataRange[cellRowIndex, cellColIndex].Value = valueList[cellColIndex];
-                        }
                     }
 
                 }
