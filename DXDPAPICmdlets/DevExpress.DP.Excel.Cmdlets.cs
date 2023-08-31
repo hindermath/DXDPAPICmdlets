@@ -15,7 +15,7 @@ namespace DXDPAPICmdlets
         private List<PSObject> _psObjects = new List<PSObject>();
         private ProcessObject _processObject = new ProcessObject();
         private ErrorRecord? _errorRecord;
-        private DXDPAPICmdlets.Models.DataTable _dataTable;
+        private Models.DataTable _dataTable;
         private ExcelHelper.CreateTable _createTable = new ExcelHelper.CreateTable();
         #endregion Properties
         #region Input Parameters
@@ -38,7 +38,7 @@ namespace DXDPAPICmdlets
         {
             if (Console.IsInputRedirected)
             {
-                ErrorRecord errorRecord = new ErrorRecord(
+                var errorRecord = new ErrorRecord(
                     new PSInvalidOperationException("Not supported in this environment (when input is redirected)."),
                     "InputNotSupported",
                     ErrorCategory.InvalidOperation,
@@ -68,7 +68,7 @@ namespace DXDPAPICmdlets
             if (_psObjects.Count.Equals(0))
                 return;
 
-            TypeGetter typeGetter = new TypeGetter(this);
+            var typeGetter = new TypeGetter(this);
 
             _dataTable = typeGetter.CastObjectsToTableView(_psObjects);
 
