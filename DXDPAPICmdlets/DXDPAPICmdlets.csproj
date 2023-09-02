@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0-windows</TargetFramework>
@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DXWFSpreadSheet\DXWFSpreadSheet.csproj" />
+    <ProjectReference Include="..\DXWFApplication1\DXWFApplication1.csproj" />
   </ItemGroup>
 
 </Project>

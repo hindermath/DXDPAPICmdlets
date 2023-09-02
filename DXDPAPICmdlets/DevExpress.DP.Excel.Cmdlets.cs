@@ -3,7 +3,7 @@ using System.Diagnostics;
 using DXDPAPICmdlets.DataHelper;
 using System.Management.Automation;
 using System.Management.Automation.Internal;
-using DXWFSpreadSheet;
+using DXWFApplication1;
 
 namespace DXDPAPICmdlets
 {
@@ -77,7 +77,7 @@ namespace DXDPAPICmdlets
 /*            if (OpenFileInSpreadsheet)
                 Process.Start(new ProcessStartInfo(FileName) {UseShellExecute = true});
 */            
-            Program.SpreadSheet();
+            Program.DxApplication();
         }
 
         public void Dispose()
