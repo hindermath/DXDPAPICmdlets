@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DevExpress.Spreadsheet;
+﻿using DevExpress.Spreadsheet;
 using DXDPAPICmdlets.Models;
 using DXDPAPICmdlets.Helper;
+
 
 namespace DXDPAPICmdlets.ExcelHelper
 {
@@ -53,7 +49,6 @@ namespace DXDPAPICmdlets.ExcelHelper
                 workbook.ExportToPdf(fileName+common.PdfExtension);
                 workbook.SaveDocument(fileName, DocumentFormat.Xlsx);
             }
-
         }
     }
 }

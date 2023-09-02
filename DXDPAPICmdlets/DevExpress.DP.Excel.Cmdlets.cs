@@ -3,7 +3,7 @@ using System.Diagnostics;
 using DXDPAPICmdlets.DataHelper;
 using System.Management.Automation;
 using System.Management.Automation.Internal;
-using DevExpress.Spreadsheet;
+using DXWFSpreadSheet;
 
 namespace DXDPAPICmdlets
 {
@@ -74,13 +74,15 @@ namespace DXDPAPICmdlets
 
             _createTable.CreateTableInSpreadsheet(_dataTable, FileName);
 
-            if (OpenFileInSpreadsheet)
+/*            if (OpenFileInSpreadsheet)
                 Process.Start(new ProcessStartInfo(FileName) {UseShellExecute = true});
+*/            
+            Program.SpreadSheet();
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            throw new System.NotImplementedException();
         }
     }
 }
