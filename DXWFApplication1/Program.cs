@@ -22,14 +22,15 @@ namespace DXWFApplication1
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
-
+        [STAThread]
         public static void DxApplication()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             WindowsFormsSettings.TrackWindowsAppMode = DefaultBoolean.True;
             WindowsFormsSettings.TrackWindowsAccentColor = DefaultBoolean.True;
-            Application.Run(new Form1());
+            Form1 form1 = new Form1() {ShowIcon = false, IconOptions = {ShowIcon = false}};
+            Application.Run(form1);
         }
     }
 }
