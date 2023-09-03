@@ -1,6 +1,6 @@
 ﻿namespace WinFormsApp1
 {
-    partial class Form2
+    partial class Form3
     {
         /// <summary>
         /// Required designer variable.
@@ -33,25 +33,24 @@
             // 
             // spreadsheetControl1
             // 
-            spreadsheetControl1.Location = new Point(178, 131);
+            spreadsheetControl1.Location = new Point(12, 41);
             spreadsheetControl1.Name = "spreadsheetControl1";
             spreadsheetControl1.Size = new Size(600, 300);
-            spreadsheetControl1.TabIndex = 0;
+            spreadsheetControl1.TabIndex = 1;
             spreadsheetControl1.Text = "spreadsheetControl1";
             // 
-            // Form2
+            // Form3
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(spreadsheetControl1);
-            Name = "Form2";
-            Text = "Form2";
+            Name = "Form3";
+            Text = "Form3";
             ResumeLayout(false);
         }
 
         #endregion
-
         private DevExpress.XtraSpreadsheet.SpreadsheetControl spreadsheetControl1;
     }
 }
