@@ -77,7 +77,8 @@ namespace DXDPAPICmdlets
 /*            if (OpenFileInSpreadsheet)
                 Process.Start(new ProcessStartInfo(FileName) {UseShellExecute = true});
 */            
-            Program.WinFormsApp();
+            Program.WinFormsApp(FileName);
+            OperatingSystem os = System.Environment.OSVersion;
         }
 
         public void Dispose()

@@ -12,9 +12,13 @@ namespace WinFormsApp1
 {
     public partial class Form3 : Form
     {
-        public Form3()
+        public Form3(string fileName)
         {
             InitializeComponent();
+            if (fileName != null)
+            {
+                spreadsheetControl1.LoadDocument(fileName);
+            }
         }
     }
 }
