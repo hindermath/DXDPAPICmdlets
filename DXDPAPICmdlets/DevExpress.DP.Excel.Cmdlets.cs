@@ -28,7 +28,7 @@ namespace DXDPAPICmdlets
         [Parameter(HelpMessage = "Open the file in the associated spreadsheet application")]
         public SwitchParameter OpenFileInSpreadsheet { get; set; }
         [Parameter(HelpMessage = "Calculates the formulas in the workbook or worksheet")]
-        public SwitchParameter CalcuateSpreadsheets { get; set; }
+        public SwitchParameter CalcuateSpreadsheet { get; set; }
         [Parameter(HelpMessage = "Export the file to PDF")]
         public SwitchParameter ExportToPdf { get; set; }
         [Parameter(Mandatory = true, HelpMessage = "Specifies the file name")]

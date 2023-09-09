@@ -28,7 +28,7 @@ namespace DXDPAPICmdlets
         /// </summary>
         [Parameter(ValueFromPipeline = true, HelpMessage = "Specifies the input pipeline object")]
         public PSObject InputObject { get; set; } = AutomationNull.Value;
-        [Parameter(HelpMessage = "Open th file in the associated word processor")]
+        [Parameter(HelpMessage = "Open the file in the associated word processor")]
         public SwitchParameter OpenFileInWordProcessor { get; set; }
         [Parameter(HelpMessage = "Export the file to PDF")]
         public SwitchParameter ExportToPdf { get; set; }
