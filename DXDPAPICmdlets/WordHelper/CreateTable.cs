@@ -9,7 +9,7 @@ namespace DXDPAPICmdlets.WordHelper
     internal class CreateTable
     {
         private readonly Common _common = new();
-        public void CreateTableInDocument(DataTable dataTable, string fileName)
+        public void CreateTableInDocument(DataTable dataTable, string fileName, DocumentFormat documentFormat, bool export2Pdf = false)
         {
             using var wordProcessor = new RichEditDocumentServer();
             Document document = wordProcessor.Document;
@@ -40,7 +40,7 @@ namespace DXDPAPICmdlets.WordHelper
                 table.EndUpdate();
             }
             wordProcessor.ExportToPdf(fileName + _common.PdfExtension);
-            wordProcessor.SaveDocument(fileName, DocumentFormat.OpenXml);
+            wordProcessor.SaveDocument(fileName, documentFormat);
         }
     }
 }

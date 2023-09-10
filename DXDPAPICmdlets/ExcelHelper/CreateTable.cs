@@ -7,7 +7,7 @@ namespace DXDPAPICmdlets.ExcelHelper
     internal class CreateTable
     {
         private readonly Common _common = new();
-        public void CreateTableInSpreadsheet(DataTable dataTable, string fileName)
+        public void CreateTableInSpreadsheet(DataTable dataTable, string fileName, DocumentFormat documentFormat, bool export2Pdf = false, bool calculateSpreadSheet = false)
         {
             using Workbook workbook = new Workbook();
             Worksheet worksheet = workbook.Worksheets[0];
@@ -44,7 +44,7 @@ namespace DXDPAPICmdlets.ExcelHelper
 
             workbook.Calculate();
             workbook.ExportToPdf(fileName + _common.PdfExtension);
-            workbook.SaveDocument(fileName, DocumentFormat.Xlsx);
+            workbook.SaveDocument(fileName, documentFormat);
 
         }
     }

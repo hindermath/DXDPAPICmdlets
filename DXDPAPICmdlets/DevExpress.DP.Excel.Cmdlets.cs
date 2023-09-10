@@ -72,7 +72,7 @@ namespace DXDPAPICmdlets
 
             _dataTable = typeGetter.CastObjectsToTableView(_psObjects);
 
-            _createTable.CreateTableInSpreadsheet(_dataTable, FileName);
+            _createTable.CreateTableInSpreadsheet(_dataTable, FileName, DocumentFormat.Xlsx);
 
             if (OpenFileInSpreadsheet)
                 Process.Start(new ProcessStartInfo(FileName) {UseShellExecute = true});

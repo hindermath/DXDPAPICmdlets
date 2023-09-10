@@ -12,7 +12,7 @@ namespace DXDPAPICmdlets
 {
     [Cmdlet(VerbsData.Save, "DxDpWordFile")]
     [Alias("SavAsWordFile")]
-    public class SaveDxDpWordCmdlet : PSCmdlet, IDisposable
+    public class SaveDxDpWordCmdlet : PSCmdlet
     {
         #region Properties
         private List<PSObject> _psObjects = new List<PSObject>();
@@ -29,9 +29,9 @@ namespace DXDPAPICmdlets
         [Parameter(ValueFromPipeline = true, HelpMessage = "Specifies the input pipeline object")]
         public PSObject InputObject { get; set; } = AutomationNull.Value;
         [Parameter(HelpMessage = "Open the file in the associated word processor")]
-        public SwitchParameter OpenFileInWordProcessor { get; set; }
+        public SwitchParameter OpenFileInWordProcessor { get; set; } = false;
         [Parameter(HelpMessage = "Export the file to PDF")]
-        public SwitchParameter ExportToPdf { get; set; }
+        public SwitchParameter ExportToPdf { get; set; } = false;
         [Parameter(Mandatory = true, HelpMessage = "Specifies the file name")]
         public string FileName { get; set; } = "a.docx";
 #endregion
@@ -76,16 +76,11 @@ namespace DXDPAPICmdlets
 
             _dataTable = typeGetter.CastObjectsToTableView(_psObjects);
 
-            _createTable.CreateTableInDocument(_dataTable, FileName);
+            _createTable.CreateTableInDocument(_dataTable, FileName, DocumentFormat.OpenXml, ExportToPdf);
 
             if (OpenFileInWordProcessor)
                 Process.Start(new ProcessStartInfo(FileName) {UseShellExecute = true});
 
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
         }
     }
 }
