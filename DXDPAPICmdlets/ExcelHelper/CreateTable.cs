@@ -37,7 +37,6 @@ namespace DXDPAPICmdlets.ExcelHelper
                         var dataTableRow = dataTable.Data[cellRowIndex];
                         var valueList = new List<string>();
                         foreach (var dataTableColumn in dataTable.DataColumns)
-                            //string dataValue = dataTableRow.Values[dataTableColumn.ToString()].DisplayValue;
                             valueList.Add(dataTableRow.Values[dataTableColumn.ToString()].DisplayValue);
                         for (var cellColIndex = 0; cellColIndex < valueList.Count; cellColIndex++)
                             cellDataRange[cellRowIndex, cellColIndex].Value = valueList[cellColIndex];

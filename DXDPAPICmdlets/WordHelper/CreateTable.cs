@@ -22,9 +22,8 @@ namespace DXDPAPICmdlets.WordHelper
                 try
                 {
                     for (int cellColumnIndex = 0; cellColumnIndex < dataTable.DataColumns.Count; cellColumnIndex++)
-                    {
-                        document.InsertText(table.Rows[cellRowIndex].Cells[cellColumnIndex].Range.Start, dataTable.DataColumns[cellColumnIndex].Label);
-                    }
+                        document.InsertText(table.Rows[cellRowIndex].Cells[cellColumnIndex].Range.Start,
+                            dataTable.DataColumns[cellColumnIndex].Label);
                     for (cellRowIndex = ++cellRowIndexValue; cellRowIndex < dataTable.Data.Count; cellRowIndex++)
                     {
                         var dataTableRow = dataTable.Data[cellRowIndex-1];
@@ -32,9 +31,8 @@ namespace DXDPAPICmdlets.WordHelper
                         foreach (var dataTableColumn in dataTable.DataColumns)
                             valueList.Add(dataTableRow.Values[dataTableColumn.ToString()].DisplayValue);
                         for (int cellColumnIndex = 0; cellColumnIndex < valueList.Count; cellColumnIndex++)
-                        {
-                            document.InsertText(table.Rows[cellRowIndex].Cells[cellColumnIndex].Range.Start, valueList[cellColumnIndex]);
-                        }
+                            document.InsertText(table.Rows[cellRowIndex].Cells[cellColumnIndex].Range.Start,
+                                valueList[cellColumnIndex]);
 
                     }
                 }
