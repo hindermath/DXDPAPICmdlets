@@ -8,41 +8,39 @@ namespace DXDPAPICmdlets.WordHelper
 {
     internal class CreateTable
     {
-        Common common = new Common();
+        private readonly Common _common = new();
         public void CreateTableInDocument(DataTable dataTable, string fileName)
         {
-            using (var wordProcessor = new RichEditDocumentServer())
+            using var wordProcessor = new RichEditDocumentServer();
+            Document document = wordProcessor.Document;
+            Table table = document.Tables.Create(document.Range.Start, dataTable.Data.Count, dataTable.DataColumns.Count, AutoFitBehaviorType.AutoFitToWindow);
+            var cellRowIndex = 0;
+            var cellRowIndexValue = 0;
+
+            table.BeginUpdate();
+            try
             {
-                Document document = wordProcessor.Document;
-                Table table = document.Tables.Create(document.Range.Start, dataTable.Data.Count, dataTable.DataColumns.Count, AutoFitBehaviorType.AutoFitToWindow);
-                int cellRowIndex = 0;
-                int cellRowIndexValue = 0;
-
-                table.BeginUpdate();
-                try
+                for (var cellColumnIndex = 0; cellColumnIndex < dataTable.DataColumns.Count; cellColumnIndex++)
+                    document.InsertText(table.Rows[cellRowIndex].Cells[cellColumnIndex].Range.Start,
+                        dataTable.DataColumns[cellColumnIndex].Label);
+                for (cellRowIndex = ++cellRowIndexValue; cellRowIndex < dataTable.Data.Count; cellRowIndex++)
                 {
-                    for (int cellColumnIndex = 0; cellColumnIndex < dataTable.DataColumns.Count; cellColumnIndex++)
+                    var dataTableRow = dataTable.Data[cellRowIndex - 1];
+                    var valueList = new List<string>();
+                    foreach (var dataTableColumn in dataTable.DataColumns)
+                        valueList.Add(dataTableRow.Values[dataTableColumn.ToString()].DisplayValue);
+                    for (int cellColumnIndex = 0; cellColumnIndex < valueList.Count; cellColumnIndex++)
                         document.InsertText(table.Rows[cellRowIndex].Cells[cellColumnIndex].Range.Start,
-                            dataTable.DataColumns[cellColumnIndex].Label);
-                    for (cellRowIndex = ++cellRowIndexValue; cellRowIndex < dataTable.Data.Count; cellRowIndex++)
-                    {
-                        var dataTableRow = dataTable.Data[cellRowIndex-1];
-                        var valueList = new List<string>();
-                        foreach (var dataTableColumn in dataTable.DataColumns)
-                            valueList.Add(dataTableRow.Values[dataTableColumn.ToString()].DisplayValue);
-                        for (int cellColumnIndex = 0; cellColumnIndex < valueList.Count; cellColumnIndex++)
-                            document.InsertText(table.Rows[cellRowIndex].Cells[cellColumnIndex].Range.Start,
-                                valueList[cellColumnIndex]);
+                            valueList[cellColumnIndex]);
 
-                    }
                 }
-                finally
-                {
-                    table.EndUpdate();
-                }                
-                wordProcessor.ExportToPdf(fileName+common.PdfExtension);
-                wordProcessor.SaveDocument(fileName, DocumentFormat.OpenXml);
             }
+            finally
+            {
+                table.EndUpdate();
+            }
+            wordProcessor.ExportToPdf(fileName + _common.PdfExtension);
+            wordProcessor.SaveDocument(fileName, DocumentFormat.OpenXml);
         }
     }
 }
