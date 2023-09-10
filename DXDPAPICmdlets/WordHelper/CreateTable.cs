@@ -15,14 +15,28 @@ namespace DXDPAPICmdlets.WordHelper
             {
                 Document document = wordProcessor.Document;
                 Table table = document.Tables.Create(document.Range.Start, dataTable.Data.Count, dataTable.DataColumns.Count, AutoFitBehaviorType.AutoFitToWindow);
-                
+                int cellRowIndex = 0;
+                int cellRowIndexValue = 0;
+
                 table.BeginUpdate();
                 try
                 {
-                    for (int i = 0; i < dataTable.DataColumns.Count; i++)
+                    for (int cellColumnIndex = 0; cellColumnIndex < dataTable.DataColumns.Count; cellColumnIndex++)
                     {
-                        document.InsertText(table.Rows[0].Cells[i].Range.Start, dataTable.DataColumns[i].Label);
-                    }                    
+                        document.InsertText(table.Rows[cellRowIndex].Cells[cellColumnIndex].Range.Start, dataTable.DataColumns[cellColumnIndex].Label);
+                    }
+                    for (cellRowIndex = ++cellRowIndexValue; cellRowIndex < dataTable.Data.Count; cellRowIndex++)
+                    {
+                        var dataTableRow = dataTable.Data[cellRowIndex-1];
+                        var valueList = new List<string>();
+                        foreach (var dataTableColumn in dataTable.DataColumns)
+                            valueList.Add(dataTableRow.Values[dataTableColumn.ToString()].DisplayValue);
+                        for (int cellColumnIndex = 0; cellColumnIndex < valueList.Count; cellColumnIndex++)
+                        {
+                            document.InsertText(table.Rows[cellRowIndex].Cells[cellColumnIndex].Range.Start, valueList[cellColumnIndex]);
+                        }
+
+                    }
                 }
                 finally
                 {
