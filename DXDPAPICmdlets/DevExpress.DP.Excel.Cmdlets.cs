@@ -9,7 +9,7 @@ namespace DXDPAPICmdlets
 {
     [Cmdlet(VerbsData.Save, "DxDpExcelFile")]
     [Alias("SavAsExcelFile")]
-    public class SaveDxDpExcelCmdlet : PSCmdlet, IDisposable
+    public class SaveDxDpExcelCmdlet : PSCmdlet
     {
         #region Properties
         private List<PSObject> _psObjects = new List<PSObject>();
@@ -76,11 +76,6 @@ namespace DXDPAPICmdlets
 
             if (OpenFileInSpreadsheet)
                 Process.Start(new ProcessStartInfo(FileName) {UseShellExecute = true});
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
         }
     }
 }
